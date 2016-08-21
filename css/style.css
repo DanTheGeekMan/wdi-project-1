@@ -3,11 +3,11 @@ body {
 }
 
 section {
-  height: 640px;
-  width: 360px; 
+  height: 360px;
+  width: 640px; 
 }
 #left {
-  background-color: green;
+  background-color: pink;
   display: inline-block;
   float: left;
   width: 25%;
@@ -19,8 +19,27 @@ section {
   width: 50%;
 }
 #right {
+  height: 360px;
   background-color: pink;
   display: inline-block;
   float: right;
   width: 25%;
+}
+#reset_button {
+  margin: 15px auto;
+  height: 30px;
+  width: 30px;
+  background-color: green;
+}
+#left_button {
+  margin: 90px auto 150px auto;
+  height: 60px;
+  width: 60px;
+  background-color: blue;
+}
+#right_button {
+  margin: 150px auto;
+  height: 60px;
+  width: 60px;
+  background-color: blue;
 }
