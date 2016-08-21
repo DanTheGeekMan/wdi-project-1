@@ -1,7 +1,10 @@
 var deliveryRescue = deliveryRescue || {}
 
 deliveryRescue.moveTruck = function(direction){
-  deliveryRescue.truckPosition = $('#truck').css("left")
+  deliveryRescue.truckPosition = $('#truck').css("left")  
+  console.log("String without px " + deliveryRescue.truckPosition.replace("px", ""))
+  console.log("Value of truckPosition "+ deliveryRescue.truckPosition + ".");
+  console.log("Length of truckPosition strig " + deliveryRescue.truckPosition.length);
   console.log("Position is " + deliveryRescue.truckPosition);
   if (direction === "left_button") {
     deliveryRescue.moveDirection += -10;
