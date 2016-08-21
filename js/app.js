@@ -1,28 +1,28 @@
 var deliveryRescue = deliveryRescue || {}
 
-deliveryRescue.moveTruck = function(){
-  console.log("ID " + $(this).attr("Id"))
-  if ($(this).attr("id") === "right_button") {
-    deliveryRescue.moveDirection = -10;
-    console.log("Move right");
-  } else {
-    deliveryRescue.moveDirection = 10;
+deliveryRescue.moveTruck = function(direction){
+  deliveryRescue.truckPosition = $('#truck').css("left")
+  console.log("Position is " + deliveryRescue.truckPosition);
+  if (direction === "left_button") {
+    deliveryRescue.moveDirection += -10;
     console.log("Move left");
+  } else {
+    deliveryRescue.moveDirection += 10;
+    console.log("Move right");
   }
+  deliveryRescue.truckPosition = "200px";
+  $('#truck').css("left", deliveryRescue.truckPosition);
 }
 
-deliveryRescue.resetGame = function(buttonId){
+deliveryRescue.resetGame = function(){
   console.log("Reset function called.")
-  console.log("Clicked buttons is " + buttonId);
-}
+  }
 
 deliveryRescue.clickButtons = function() {
   if ($(this).attr("id") === "reset_button") {
-    console.log("reset event check 1" + $(this).attr("id"))
-    deliveryRescue.resetGame($(this).attr("id"));
-    console.log("reset event check last" + $(this).attr("id"))
+    deliveryRescue.resetGame();
       } else {
-      deliveryRescue.moveTruck();
+      deliveryRescue.moveTruck($(this).attr("id"));
   }
 }
 
