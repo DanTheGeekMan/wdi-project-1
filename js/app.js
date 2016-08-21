@@ -1,36 +1,15 @@
 var deliveryRescue = deliveryRescue || {}
 
-// deliveryRescue.getButtons = function() {
-//   this.buttons = document.querySelectorAll(".buttons");
-//   console.log("Buttons " + this.buttons + ".");
-// }
-// deliveryRescue.addListeners = function(addListenerTo) {
-//   for (var i = 0; i < addListenerTo.length; i++) {
-//     addListenerTo[i].addEventListener("click", function(){
-// this.test = event.target.getAttribute('id');
-//       console.log("hello world " + this.test + ".");});
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-deliveryRescue.setup = function() {
-  $.buttonsVar = $('.buttons')
-console.log("buttons are " + $.buttonsVar);
-  // this.getButtons();
-  // this.addListeners(this.buttons);
+deliveryRescue.clickButtons = function() {
+  console.log("Clicked buttons is " + $(this).attr("id"));
 }
 
-$(document).ready(deliveryRescue.setup);
+deliveryRescue.addListeners = function() {
+  $('.buttons').on("click", deliveryRescue.clickButtons);
+}
 
-// window.addEventListener("DOMContentLoaded", deliveryRescue.setup.bind(deliveryRescue));
+deliveryRescue.setup = function() {
+  deliveryRescue.addListeners();
+}
+
+$(document).ready(deliveryRescue.setup.bind(deliveryRescue));
