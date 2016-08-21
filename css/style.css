@@ -1,3 +1,26 @@
 body {
+  max-width: 640px;
+}
+
+section {
+  height: 640px;
+  width: 360px; 
+}
+#left {
   background-color: green;
+  display: inline-block;
+  float: left;
+  width: 25%;
+}
+#middle {
+  background-color: blue;
+  display: inline-block;
+  float: middle;
+  width: 50%;
+}
+#right {
+  background-color: pink;
+  display: inline-block;
+  float: right;
+  width: 25%;
 }
