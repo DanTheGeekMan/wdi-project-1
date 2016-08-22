@@ -1,4 +1,5 @@
 var deliveryRescue = deliveryRescue || {}
+deliveryRescue.timerCounter = 0;
 
 deliveryRescue.moveTruck = function(direction){
   deliveryRescue.truckPosition = parseInt($('#truck').css("left").replace("px", ""))
@@ -11,20 +12,48 @@ deliveryRescue.moveTruck = function(direction){
 
   deliveryRescue.resetGame = function(){
     $('#truck').css("left", 290);
+    deliveryRescue.timerCounter = 0;
+    $('#clearNotifyBox').css("display", "block");
+    $('#notifyBox').css("display", "block");
   }
 
-  deliveryRescue.timerCounter = 0;
+  deliveryRescue.boxFall = function () {
+    $("#box").css('display', "block");
+    var $dropDiv = $('#dropDiv');
+    $('#holder a').on('click', function() {
+        var offset = $(this).offset(); // get position of the element we clicked on
+        var h = $(this).outerHeight(); // get width/height of click element
+        var w = $(this).outerWidth();
+        var dh = $dropDiv.outerHeight(); // get width/height of drop element
+        var dw = $dropDiv.outerWidth();
+        var initLeft = offset.left + ((w/2) - (dw/2)); // determine middle position
+        
+        $dropDiv.css({ // animate drop
+                left: initLeft,
+                top: $(window).scrollTop() - dh,
+                opacity: 0,
+                display: 'block'
+            }).animate({
+                left: initLeft,
+                top: offset.top - dh,
+                opacity: 1
+            }, 2500, 'easeOutBounce');
+    });
+  }
+
   deliveryRescue.timerFunction = function() {
     setInterval(function() { deliveryRescue.timerCounter++;
     }, 1000);
   }
 
   deliveryRescue.clickButtons = function() {
+    console.log("Button clicked " + $(this).attr('id') + " and the timer is at " + deliveryRescue.timerCounter + " seconds.");
     if ($("#notifyBox").css("display") === "block") {
       if ($(this).attr('id') === "clearNotifyBox") {
        $('#clearNotifyBox').css("display", "none");
        $('#notifyBox').css("display", "none");
-       deliveryRescue.timerFunction();     
+       deliveryRescue.timerFunction();   
+       deliveryRescue.boxFall();  
      }
    } else {
      if ($(this).attr("id") === "reset_button") {

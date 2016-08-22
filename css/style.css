@@ -67,9 +67,26 @@ section {
   left: 290px;
   top: 300px;
 }
+#launcher {
+  position: absolute;
+  top: 200px;
+  left: 100px; 
+}
 #box {
   height: 50px;
   width: 50px;
   background-color: orange;
-  /*display: none;*/
+  display: none;
+}
+#holder {
+ position: absolute;
+ top: 200px;
+ left: 100px;   
+}
+
+#dropDiv {
+ display: none;
+ position: absolute;
+ top: -20px;
+ background: #ccc; 
 }
