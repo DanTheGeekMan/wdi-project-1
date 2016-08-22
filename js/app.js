@@ -18,17 +18,16 @@ deliveryRescue.moveTruck = function(direction){
   }
 
   deliveryRescue.boxFall = function () {
-    $("#box").css('display', "block");
-    var $dropDiv = $('#dropDiv');
-    $('#holder a').on('click', function() {
+    var $boxObj = $('#box');
+    $('#click_launcher').on('click', function() {
         var offset = $(this).offset(); // get position of the element we clicked on
         var h = $(this).outerHeight(); // get width/height of click element
         var w = $(this).outerWidth();
-        var dh = $dropDiv.outerHeight(); // get width/height of drop element
-        var dw = $dropDiv.outerWidth();
+        var dh = $boxObj.outerHeight(); // get width/height of drop element
+        var dw = $boxObj.outerWidth();
         var initLeft = offset.left + ((w/2) - (dw/2)); // determine middle position
         
-        $dropDiv.css({ // animate drop
+        $boxObj.css({ // animate drop
                 left: initLeft,
                 top: $(window).scrollTop() - dh,
                 opacity: 0,
