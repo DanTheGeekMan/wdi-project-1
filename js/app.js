@@ -19,25 +19,18 @@ deliveryRescue.moveTruck = function(direction){
 
   deliveryRescue.boxFall = function () {
     var $boxObj = $('#box');
-    $('#click_launcher').on('click', function() {
-        var offset = $(this).offset(); // get position of the element we clicked on
-        var h = $(this).outerHeight(); // get width/height of click element
-        var w = $(this).outerWidth();
-        var dh = $boxObj.outerHeight(); // get width/height of drop element
-        var dw = $boxObj.outerWidth();
-        var initLeft = offset.left + ((w/2) - (dw/2)); // determine middle position
-        
-        $boxObj.css({ // animate drop
-                left: initLeft,
-                top: $(window).scrollTop() - dh,
-                opacity: 0,
-                display: 'block'
-            }).animate({
-                left: initLeft,
-                top: offset.top - dh,
-                opacity: 1
-            }, 2500, 'easeOutBounce');
-    });
+    var top = 360;
+    var left = 200;
+    $boxObj.css({
+      left: left,
+      top: 0,
+      opacity: 0,
+      display: 'block'
+    }).animate({
+      left: left,
+      top: 310,
+      opacity: 1
+    }, 2500, 'easeOutBounce');
   }
 
   deliveryRescue.timerFunction = function() {
@@ -65,21 +58,10 @@ deliveryRescue.moveTruck = function(direction){
 
 deliveryRescue.addListeners = function() {
   $('.buttons').on("click", deliveryRescue.clickButtons);
-  // $(function(){
-  //   $('div').on("click", function() {
-  //     var $element = $(this);
-  //     $element.hide("slow", "swing", function(){
-  //       setTimeout(function(){
-  //         $element.show();
-  //       }, 1000);
-  //     });
-  //   });
-  // });
 }
 
 deliveryRescue.setup = function() {
   deliveryRescue.addListeners();
 }
-
 
 $(document).ready(deliveryRescue.setup.bind(deliveryRescue));
