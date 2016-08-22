@@ -1,24 +1,17 @@
 var deliveryRescue = deliveryRescue || {}
 
 deliveryRescue.moveTruck = function(direction){
-  deliveryRescue.truckPosition = $('#truck').css("left")  
-  console.log("String without px " + deliveryRescue.truckPosition.replace("px", ""))
-  console.log("Value of truckPosition "+ deliveryRescue.truckPosition + ".");
-  console.log("Length of truckPosition strig " + deliveryRescue.truckPosition.length);
-  console.log("Position is " + deliveryRescue.truckPosition);
+  deliveryRescue.truckPosition = parseInt($('#truck').css("left").replace("px", ""))
   if (direction === "left_button") {
-    deliveryRescue.moveDirection += -10;
-    console.log("Move left");
-  } else {
-    deliveryRescue.moveDirection += 10;
-    console.log("Move right");
-  }
-  deliveryRescue.truckPosition = "200px";
+    deliveryRescue.truckPosition += -10;
+    } else {
+    deliveryRescue.truckPosition += 10; }
   $('#truck').css("left", deliveryRescue.truckPosition);
 }
 
 deliveryRescue.resetGame = function(){
-  console.log("Reset function called.")
+  $('#truck').css("left", 290);
+
   }
 
 deliveryRescue.clickButtons = function() {
