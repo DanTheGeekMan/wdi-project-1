@@ -67,11 +67,10 @@ section {
   left: 290px;
   top: 300px;
 }
-#box {
+.box {
   height: 50px;
   width: 50px;
   background-color: orange;
-  display: none;
   position: absolute;
   top: -20px;
 }

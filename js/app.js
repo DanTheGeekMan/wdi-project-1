@@ -17,35 +17,56 @@ deliveryRescue.moveTruck = function(direction){
     $('#notifyBox').css("display", "block");
   }
 
-  deliveryRescue.boxFall = function () {
-    deliveryRescue.boxCount = 10;
-    var $boxObj = $('#box');
-    var top = 360;
-    var left = 200; for(i = 0; i < deliveryRescue.boxCount; i++) {
-      $boxObj.css({
-        left: left,
-        top: 0,
-        opacity: 0,
-        display: 'block'
-      }).animate({
-        left: left,
-        top: 310,
-        opacity: 1
-      }, 2500, 'easeOutBounce');
-    }
+  deliveryRescue.generateBox = function () {
+        var leftValue = Math.floor(Math.random() * (430 - 160 + 1)) + 160;
+        $("<div class='box'></div>")
+        .appendTo("#middle")
+        .css("left",leftValue + "px")
+        .animate({
+          top: 310
+        }, 2500)
+
+        // $('#middle').append(box).css('left','300px')
+        // console.log(box)
+        // $(box).css({
+        //   left: leftValue,
+        //   top: 0,
+        //   opacity: 0,
+        //   display: 'block'
+        // }).animate({
+        //   left: leftValue,
+        //   top: 310,
+        //   opacity: 1
+        // }, 2500, 'easeOutBounce');
+
   }
 
-//   deliveryRescue.collisionDetection = function () {
-//     var rect1 = {x: 5, y: 5, width: 50, height: 50}
-//     var rect2 = {x: 20, y: 10, width: 10, height: 10}
+  // deliveryRescue.boxFall = function () {
+  //   deliveryRescue.testBox = $('<div class="box"></div>').appendTo('#middle').css("left");
 
-//     if (rect1.x < rect2.x + rect2.width &&
-//      rect1.x + rect1.width > rect2.x &&
-//      rect1.y < rect2.y + rect2.height &&
-//      rect1.height + rect1.y > rect2.y) {
-//       // collision detected!
-//   }
-// }
+  //   // deliveryRescue.boxCount = 10;
+  //   var $boxObj = $('#box');
+  //   // var top = 360;
+  //   // var left = 200; for(i = 0; i < deliveryRescue.boxCount; i++) {
+  //     $boxObj.css({
+  //       left: left,
+  //       top: 0,
+  //       opacity: 0,
+  //       display: 'block'
+  //     }).animate({
+  //       left: left,
+  //       top: 310,
+  //       opacity: 1
+  //     }, 2500, 'easeOutBounce');
+  // //   }
+  // // }
+  // append to #middle
+  // function init () {
+  //   $('ul').on('click', 'li', function() {
+  //     $(this).parent().append($(this).clone());
+  //   })
+  // }
+ // this.dom = $('<p class="circle"></p>').appendTo('#ground');
 
 deliveryRescue.timerFunction = function() {
   setInterval(function() { deliveryRescue.timerCounter++;
@@ -58,10 +79,11 @@ deliveryRescue.clickButtons = function() {
     if ($(this).attr('id') === "clearNotifyBox") {
      $('#clearNotifyBox').css("display", "none");
      $('#notifyBox').css("display", "none");
+     setInterval(function() {deliveryRescue.generateBox()},1500)
      deliveryRescue.timerFunction();   
        // deliveryRescue.collisionDetection();
-       deliveryRescue.boxFall();  
-       deliveryRescue.boxFall();  
+       // deliveryRescue.generateBox();  
+       //deliveryRescue.boxFall();  
      }
    } else {
      if ($(this).attr("id") === "reset_button") {
