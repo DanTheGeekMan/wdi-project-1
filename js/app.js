@@ -36,12 +36,12 @@ deliveryRescue.generateBox = function () {
    }, 2500)
   var workingBox = "#" + currentBoxId;
   arrayOfBoxes.push(currentBoxId);
+  console.log(arrayOfBoxes)
   
   setInterval(function() {
     $(workingBox).remove()
-    var desiredIndexOfArrayOfBoxes = arrayOfBoxes.indexOf('#2');
-    console.log("Array index of working box is " + desiredIndexOfArrayOfBoxes);
-  },2500);
+    arrayOfBoxes.splice(workingBox, 1);
+  },10000);
   currentBoxId++;
   
   //collision detection
