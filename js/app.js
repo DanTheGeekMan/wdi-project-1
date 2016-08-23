@@ -65,7 +65,7 @@ deliveryRescue.clickButtons = function() {
     if ($(this).attr('id') === "clearNotifyBox") {
      $('#clearNotifyBox').css("display", "none");
      $('#notifyBox').css("display", "none");
-     setInterval(function() {deliveryRescue.generateBox()},3000)
+     setInterval(function() {deliveryRescue.generateBox()},1500)
      deliveryRescue.timerFunction();   
    }
  } else {
