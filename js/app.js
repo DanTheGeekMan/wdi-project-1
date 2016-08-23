@@ -35,13 +35,15 @@ deliveryRescue.generateBox = function () {
     duration: deliveryRescue.speed,
     step: function(now, fx){
       var $block          = $(this);
+      //var testing = $block.width()
       var blockPosition   = $block.position();
       var truckPosition   = deliveryRescue.$truck.position();
       var intersectPoint  = deliveryRescue.$middle.height() - $block.height() - deliveryRescue.$truck.height();
+      //var intersectHoriz  = deliveryRescue.$middle.width() - $block.width() - deliveryRescue.$truck.width();
       var intersectMargin = 5;
-
-      if (blockPosition.top - intersectPoint >= 0 && blockPosition.top - intersectPoint < intersectMargin &&
-          truckPosition.left - blockPosition.left < $block.width()) {
+      if ((blockPosition.top - intersectPoint) >= 0 && (blockPosition.top - intersectPoint) < intersectMargin &&
+          ((truckPosition.left < blockPosition.left) && (truckPosition.left + 100) > (blockPosition.left + 50))){ 
+          //(truckPosition.left - blockPosition.left) < $block.width()) {
         var prevScore = parseInt(deliveryRescue.$score.html());
         deliveryRescue.$score.html(prevScore += 1); 
         $block.remove();
