@@ -42,16 +42,19 @@ deliveryRescue.generateBox = function () {
       //var intersectHoriz  = deliveryRescue.$middle.width() - $block.width() - deliveryRescue.$truck.width();
       var intersectMargin = 5;
       if ((blockPosition.top - intersectPoint) >= 0 && (blockPosition.top - intersectPoint) < intersectMargin &&
-          ((truckPosition.left < blockPosition.left) && (truckPosition.left + 100) > (blockPosition.left + 50))){ 
+        ((truckPosition.left < blockPosition.left) && (truckPosition.left + 100) > (blockPosition.left + 50))){ 
           //(truckPosition.left - blockPosition.left) < $block.width()) {
-        var prevScore = parseInt(deliveryRescue.$score.html());
-        deliveryRescue.$score.html(prevScore += 1); 
-        $block.remove();
-      } else {
-        // Check if it's at the bottom
-      }
-    }
-  })
+            var prevScore = parseInt(deliveryRescue.$score.html());
+            deliveryRescue.$score.html(prevScore += 45); 
+            $block.remove();
+          } else {
+            if(blockPosition.top + 50 > deliveryRescue.$middle.height() && blockPosition.top + 50 >= deliveryRescue.$middle.height() + 1) {
+              var prevHealth = parseInt(deliveryRescue.$health.html());
+              deliveryRescue.$health.html(prevHealth - 1);
+            } 
+          }
+        }
+      })
 
   var workingBox = "#" + deliveryRescue.currentBoxId;
   deliveryRescue.arrayOfBoxes.push(deliveryRescue.currentBoxId);
@@ -101,13 +104,13 @@ deliveryRescue.bindArrowKeys = function(e){
 
   switch (event.keyCode) {
     case 37: 
-      if (deliveryRescue.truckPosition === farLeft) return;
-      deliveryRescue.truckPosition += -20;
-      break;
+    if (deliveryRescue.truckPosition === farLeft) return;
+    deliveryRescue.truckPosition += -20;
+    break;
     case 39:
-      if (deliveryRescue.truckPosition === farRight) return;
-      deliveryRescue.truckPosition += 20; 
-      break;
+    if (deliveryRescue.truckPosition === farRight) return;
+    deliveryRescue.truckPosition += 20; 
+    break;
   }
   
 
@@ -123,7 +126,7 @@ deliveryRescue.setup = function() {
   this.timerCounter = 0;
   this.currentBoxId = 0;
   this.score        = 0;
-  this.health       = 10;
+  this.health       = 10000;
   this.arrayOfBoxes = [];
   this.boxWidth     = 50;
   this.speed        = 3000;
@@ -132,6 +135,7 @@ deliveryRescue.setup = function() {
   this.$middle      = $("#middle");
   this.$truck       = $('#truck');
   this.$score       = $('.score');
+  this.$health       = $('.health');
   this.$clearNotify = $('#clearNotifyBox');
   this.boxInterval;
   this.timerInterval;

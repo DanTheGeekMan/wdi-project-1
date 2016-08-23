@@ -21,6 +21,7 @@ section {
   width: 100%;
   max-width: 1000px;
   height: 100%;
+  max-height: 450px;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -81,7 +82,7 @@ section {
   background-image: url("http://cdn2.bigcommerce.com/server2400/7bd0c/product_images/uploaded_images/yodel-van-side-lr-rt-rgb.jpg?t=1399383377");
 }
 
-.lives {
+.health {
   text-align: left;
   color: yellow;
   font-size: 30px;
