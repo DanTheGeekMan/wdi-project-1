@@ -46,12 +46,10 @@ deliveryRescue.generateBox = function () {
           //(truckPosition.left - blockPosition.left) < $block.width()) {
             var prevScore = parseInt(deliveryRescue.$score.html());
             deliveryRescue.$score.html(prevScore += 50);
-            if (prevScore === 10) {
-              alert("you win")
-              // deliveryRescue.$gameResultBox.css("display", "block");
-              // deliveryRescue.$gameResultBox.html("<h1>Player wins.  You're awesome.</h1>");
-              // deliveryRescue.$clearGameResultBox.css("display", "block");
-              alert("you win")
+            if (prevScore === 100) {
+              deliveryRescue.$gameResultBox.css("display", "block");
+              deliveryRescue.$gameResultBox.html("<h1>Player wins.  You're awesome.</h1>");
+              deliveryRescue.$clearGameResultBox.css("display", "block");
             } 
             $block.remove();
           } else {
@@ -60,10 +58,9 @@ deliveryRescue.generateBox = function () {
               deliveryRescue.$health.html(prevHealth - 1);
             } 
             if (prevHealth === 0) {
-              // deliveryRescue.$gameResultBox.css("display", "block");
-              // deliveryRescue.$gameResultBox.html("<h1>Player looses.  Sorry tough luck.</h1>");
-              // deliveryRescue.$clearGameResultBox.css("display", "block");
-              alert ("you loose sucker")
+              deliveryRescue.$gameResultBox.css("display", "block");
+              deliveryRescue.$gameResultBox.html("<h1>Player looses.  You need more practice.</h1>");
+              deliveryRescue.$clearGameResultBox.css("display", "block");
             }
           }
         }
@@ -141,20 +138,22 @@ deliveryRescue.addListeners = function() {
 }
 
 deliveryRescue.setup = function() {
-  this.timerCounter = 0;
-  this.currentBoxId = 0;
-  this.score        = 0;
-  this.health       = 500;
-  this.arrayOfBoxes = [];
-  this.boxWidth     = 50;
-  this.speed        = 3000;
-  this.$buttons     = $(".buttons");
-  this.$notify      = $("#notifyBox");
-  this.$middle      = $("#middle");
-  this.$truck       = $('#truck');
-  this.$score       = $('.score');
-  this.$health       = $('.health');
-  this.$clearNotify = $('#clearNotifyBox');
+  this.timerCounter        = 0;
+  this.currentBoxId        = 0;
+  this.score               = 0;
+  this.health              = 10;
+  this.arrayOfBoxes        = [];
+  this.boxWidth            = 50;
+  this.speed               = 3000;
+  this.$buttons            = $(".buttons");
+  this.$notify             = $("#notifyBox");
+  this.$middle             = $("#middle");
+  this.$truck              = $('#truck');
+  this.$score              = $('.score');
+  this.$health             = $('.health');
+  this.$clearNotify        = $('#clearNotifyBox');
+  this.$gameResultBox      = $('#gameResultBox');
+  this.$clearGameResultBox = $('#clearGameResultBox');
   this.boxInterval;
   this.timerInterval;
   deliveryRescue.addListeners();
