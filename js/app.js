@@ -20,7 +20,7 @@ deliveryRescue.moveTruck = function(direction){
 var currentBoxId = 0;
 var score = 0;
 var health = 10;
-var arrayOfBoxes = [];
+var lisOfBoxes = {};
 
 // var rect = element.getBoundingClientRect();
 // console.log(rect.top, rect.right, rect.bottom, rect.left);
@@ -41,28 +41,23 @@ deliveryRescue.generateBox = function () {
   setInterval(function() {
     $(workingBox).remove()
     arrayOfBoxes.splice(workingBox, 1);
-  },10000);
+  },2500);
   currentBoxId++;
   
   //collision detection
   // setInterval(function() {
   //   arrayOfBoxes = $('#box')
+
+  //     var truckStatus = {x: 5, y: 5, width: 50, height: 50}
+  //     var boxStatus = {x: 20, y: 10, width: 10, height: 10}
+
+  //     if (truckStatus.x < boxStatus.x + boxStatus.width &&
+  //      truckStatus.x + truckStatus.width > boxStatus.x &&
+  //      truckStatus.y < boxStatus.y + boxStatus.height &&
+  //      truckStatus.height + truckStatus.y > boxStatus.y) {
+  //       score++;
+  //   }
   // }, 100);
-
-
-
-
-
-
-  //detectCollision();
-  //   var truckStatus = {x: 5, y: 5, width: 50, height: 50}
-  //   var boxStatus = {x: 20, y: 10, width: 10, height: 10}
-
-  //   if (truckStatus.x < boxStatus.x + boxStatus.width &&
-  //    truckStatus.x + truckStatus.width > boxStatus.x &&
-  //    truckStatus.y < boxStatus.y + boxStatus.height &&
-  //    truckStatus.height + truckStatus.y > boxStatus.y) {
-  // }
 }
 
 deliveryRescue.timerFunction = function() {
