@@ -30,7 +30,7 @@ deliveryRescue.generateBox = function () {
   .appendTo(deliveryRescue.$middle)
   .css("left", leftValue + "px")
   .animate({
-    top: 310
+    top: deliveryRescue.$middle.height()
   }, {
     duration: deliveryRescue.speed,
     step: function(now, fx){
@@ -42,7 +42,11 @@ deliveryRescue.generateBox = function () {
 
       if (blockPosition.top - intersectPoint >= 0 && blockPosition.top - intersectPoint < intersectMargin &&
           truckPosition.left - blockPosition.left < $block.width()) {
+        var prevScore = parseInt(deliveryRescue.$score.html());
+        deliveryRescue.$score.html(prevScore += 1); 
         $block.remove();
+      } else {
+        // Check if it's at the bottom
       }
     }
   })
@@ -52,6 +56,7 @@ deliveryRescue.generateBox = function () {
 
   setTimeout(function() {
     $(workingBox).remove()
+
     deliveryRescue.arrayOfBoxes.splice(workingBox, 1);
   }, deliveryRescue.speed);
 
@@ -95,11 +100,11 @@ deliveryRescue.bindArrowKeys = function(e){
   switch (event.keyCode) {
     case 37: 
       if (deliveryRescue.truckPosition === farLeft) return;
-      deliveryRescue.truckPosition += -10;
+      deliveryRescue.truckPosition += -20;
       break;
     case 39:
       if (deliveryRescue.truckPosition === farRight) return;
-      deliveryRescue.truckPosition += 10; 
+      deliveryRescue.truckPosition += 20; 
       break;
   }
   
@@ -124,6 +129,7 @@ deliveryRescue.setup = function() {
   this.$notify      = $("#notifyBox");
   this.$middle      = $("#middle");
   this.$truck       = $('#truck');
+  this.$score       = $('.score');
   this.$clearNotify = $('#clearNotifyBox');
   this.boxInterval;
   this.timerInterval;
