@@ -1,92 +1,132 @@
-var deliveryRescue = deliveryRescue || {}
-deliveryRescue.timerCounter = 0;
+var deliveryRescue = deliveryRescue || {};
 
 deliveryRescue.moveTruck = function(direction){
-  deliveryRescue.truckPosition = parseInt($('#truck').css("left").replace("px", ""))
+  deliveryRescue.truckPosition = parseInt(deliveryRescue.$truck.css("left").replace("px", ""))
   if (direction === "left_button") {
     deliveryRescue.truckPosition += -10;
   } else {
-    deliveryRescue.truckPosition += 10; }
-    $('#truck').css("left", deliveryRescue.truckPosition);
+    deliveryRescue.truckPosition += 10; 
   }
+  deliveryRescue.$truck.css("left", deliveryRescue.truckPosition);
+}
 
-  deliveryRescue.resetGame = function(){
-    $('#truck').css("left", 290);
-    deliveryRescue.timerCounter = 0;
-    $('#clearNotifyBox').css("display", "block");
-    $('#notifyBox').css("display", "block");
-  }
+deliveryRescue.resetGame = function(){
+  deliveryRescue.$truck.css("left", 290);
+  deliveryRescue.timerCounter = 0;
+  deliveryRescue.$clearNotify.css("display", "block");
+  deliveryRescue.$notify.css("display", "block");
+}
 
-var currentBoxId = 0;
-var score = 0;
-var health = 10;
-var lisOfBoxes = {};
-
-// var rect = element.getBoundingClientRect();
-// console.log(rect.top, rect.right, rect.bottom, rect.left);
+deliveryRescue.generateRandomNumber = function(){
+  var left = this.$middle.position().left;
+  return Math.floor(Math.random() * ((this.$middle.width() - this.boxWidth) - left + 1)) + left;
+}
 
 deliveryRescue.generateBox = function () {
-  var leftValue = Math.floor(Math.random() * (430 - 160 + 1)) + 160;
-  var divTag = "<div class='box' id='" + currentBoxId + "'></div>"
+  var leftValue = deliveryRescue.generateRandomNumber();
+  var divTag = "<div class='box' id='" + deliveryRescue.currentBoxId + "'></div>"
+  
   $(divTag)
-  .appendTo("#middle")
-  .css("left",leftValue + "px")
+  .appendTo(deliveryRescue.$middle)
+  .css("left", leftValue + "px")
   .animate({
     top: 310
-   }, 2500)
-  var workingBox = "#" + currentBoxId;
-  arrayOfBoxes.push(currentBoxId);
-  console.log(arrayOfBoxes)
-  
-  setInterval(function() {
+  }, {
+    duration: deliveryRescue.speed,
+    step: function(now, fx){
+      var $block          = $(this);
+      var blockPosition   = $block.position();
+      var truckPosition   = deliveryRescue.$truck.position();
+      var intersectPoint  = deliveryRescue.$middle.height() - $block.height() - deliveryRescue.$truck.height();
+      var intersectMargin = 5;
+
+      if (blockPosition.top - intersectPoint >= 0 && blockPosition.top - intersectPoint < intersectMargin &&
+          truckPosition.left - blockPosition.left < $block.width()) {
+        $block.remove();
+      }
+    }
+  })
+
+  var workingBox = "#" + deliveryRescue.currentBoxId;
+  deliveryRescue.arrayOfBoxes.push(deliveryRescue.currentBoxId);
+
+  setTimeout(function() {
     $(workingBox).remove()
-    arrayOfBoxes.splice(workingBox, 1);
-  },2500);
-  currentBoxId++;
-  
-  //collision detection
-  // setInterval(function() {
-  //   arrayOfBoxes = $('#box')
+    deliveryRescue.arrayOfBoxes.splice(workingBox, 1);
+  }, deliveryRescue.speed);
 
-  //     var truckStatus = {x: 5, y: 5, width: 50, height: 50}
-  //     var boxStatus = {x: 20, y: 10, width: 10, height: 10}
-
-  //     if (truckStatus.x < boxStatus.x + boxStatus.width &&
-  //      truckStatus.x + truckStatus.width > boxStatus.x &&
-  //      truckStatus.y < boxStatus.y + boxStatus.height &&
-  //      truckStatus.height + truckStatus.y > boxStatus.y) {
-  //       score++;
-  //   }
-  // }, 100);
+  deliveryRescue.currentBoxId++;
 }
 
 deliveryRescue.timerFunction = function() {
-  setInterval(function() { deliveryRescue.timerCounter++;
+  deliveryRescue.timerInterval = setInterval(function() { 
+    deliveryRescue.timerCounter++;
   }, 1000);
 }
 
 deliveryRescue.clickButtons = function() {
-  if ($("#notifyBox").css("display") === "block") {
+  if (deliveryRescue.$notify.css("display") === "block") {
     if ($(this).attr('id') === "clearNotifyBox") {
-     $('#clearNotifyBox').css("display", "none");
-     $('#notifyBox').css("display", "none");
-     setInterval(function() {deliveryRescue.generateBox()},1500)
-     deliveryRescue.timerFunction();   
-   }
- } else {
-   if ($(this).attr("id") === "reset_button") {
-    deliveryRescue.resetGame();
+      deliveryRescue.$clearNotify.css("display", "none");
+      deliveryRescue.$notify.css("display", "none");
+      
+      deliveryRescue.boxInterval = setInterval(function() {
+        deliveryRescue.generateBox()
+      },1500);
+
+      deliveryRescue.timerFunction();   
+    }
   } else {
-    deliveryRescue.moveTruck($(this).attr("id"));
-  } 
+    if ($(this).attr("id") === "reset_button") {
+      deliveryRescue.resetGame();
+    } else {
+      deliveryRescue.moveTruck($(this).attr("id"));
+    } 
+  }
 }
+
+deliveryRescue.bindArrowKeys = function(e){
+  var event = window.event ? window.event : e;
+  deliveryRescue.truckPosition = parseInt(deliveryRescue.$truck.css("left").replace("px", ""))
+
+  var farLeft  = deliveryRescue.$middle.position().left;
+  var farRight = farLeft + deliveryRescue.$middle.width() - deliveryRescue.$truck.width();
+
+  switch (event.keyCode) {
+    case 37: 
+      if (deliveryRescue.truckPosition === farLeft) return;
+      deliveryRescue.truckPosition += -10;
+      break;
+    case 39:
+      if (deliveryRescue.truckPosition === farRight) return;
+      deliveryRescue.truckPosition += 10; 
+      break;
+  }
+  
+
+  return deliveryRescue.$truck.css("left", deliveryRescue.truckPosition);
 }
 
 deliveryRescue.addListeners = function() {
-  $('.buttons').on("click", deliveryRescue.clickButtons);
+  this.$buttons.on("click", deliveryRescue.clickButtons);
+  $(document).keydown(deliveryRescue.bindArrowKeys);
 }
 
 deliveryRescue.setup = function() {
+  this.timerCounter = 0;
+  this.currentBoxId = 0;
+  this.score        = 0;
+  this.health       = 10;
+  this.arrayOfBoxes = [];
+  this.boxWidth     = 50;
+  this.speed        = 3000;
+  this.$buttons     = $(".buttons");
+  this.$notify      = $("#notifyBox");
+  this.$middle      = $("#middle");
+  this.$truck       = $('#truck');
+  this.$clearNotify = $('#clearNotifyBox');
+  this.boxInterval;
+  this.timerInterval;
   deliveryRescue.addListeners();
 }
 
