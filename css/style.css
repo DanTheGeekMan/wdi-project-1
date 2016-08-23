@@ -7,41 +7,52 @@ section {
   height: 360px;
 }
 #left {
-  background-color: pink;
+  border: 5px, solid, black;
+  border-radius: 20px, 0, 0, 20px;
+  background-color: beige;
   display: inline-block;
   float: left;
   width: 25%;
 }
 #middle {
-  background-color: blue;
+  background-color: black;
   display: inline-block;
   float: middle;
   width: 50%;
 }
 #right {
+  border-radius: 0, 20px, 0, 20px;
   height: 360px;
-  background-color: pink;
+  background-color: beige;
   display: inline-block;
   float: right;
   width: 25%;
 }
 #reset_button {
+  border-radius: 10%;
   margin: 15px auto;
   height: 30px;
   width: 30px;
   background-color: green;
 }
 #left_button {
+  border: 5px solid red;
+  background: linear-gradient(red, yellow);
+  border-radius: 100px;
   margin: 90px auto 150px auto;
   height: 60px;
   width: 60px;
-  background-color: blue;
+  text-align: center;
 }
 #right_button {
+  border: 5px solid red;
+  background: linear-gradient(red, yellow);
+  border-radius: 100px;
   margin: 150px auto;
   height: 60px;
   width: 60px;
-  background-color: blue;
+  text-align: center;
+  vertical-align: middle;
 }
 #notifyBox {
   height: 200px;
@@ -62,10 +73,11 @@ section {
 #truck {
   height: 60px;
   width: 100px;
-  background-color: yellow;
+/*  background-color: yellow;*/
   position: absolute;
   left: 290px;
   top: 300px;
+  background-image: url("http://cdn2.bigcommerce.com/server2400/7bd0c/product_images/uploaded_images/yodel-van-side-lr-rt-rgb.jpg?t=1399383377");
 }
 .box {
   height: 50px;

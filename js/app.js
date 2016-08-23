@@ -17,56 +17,43 @@ deliveryRescue.moveTruck = function(direction){
     $('#notifyBox').css("display", "block");
   }
 
-  deliveryRescue.generateBox = function () {
-        var leftValue = Math.floor(Math.random() * (430 - 160 + 1)) + 160;
-        $("<div class='box'></div>")
-        .appendTo("#middle")
-        .css("left",leftValue + "px")
-        .animate({
-          top: 310
-        }, 2500)
+  deliveryRescue.detectCollision = function () {
+    var truckStatus = {x: 5, y: 5, width: 50, height: 50}
+    var boxStatus = {x: 20, y: 10, width: 10, height: 10}
 
-        // $('#middle').append(box).css('left','300px')
-        // console.log(box)
-        // $(box).css({
-        //   left: leftValue,
-        //   top: 0,
-        //   opacity: 0,
-        //   display: 'block'
-        // }).animate({
-        //   left: leftValue,
-        //   top: 310,
-        //   opacity: 1
-        // }, 2500, 'easeOutBounce');
-
+    if (truckStatus.x < boxStatus.x + boxStatus.width &&
+     truckStatus.x + truckStatus.width > boxStatus.x &&
+     truckStatus.y < boxStatus.y + boxStatus.height &&
+     truckStatus.height + truckStatus.y > boxStatus.y) {
+      // collision detected!
   }
+}
 
-  // deliveryRescue.boxFall = function () {
-  //   deliveryRescue.testBox = $('<div class="box"></div>').appendTo('#middle').css("left");
+deliveryRescue.boxRemove = function (){
 
-  //   // deliveryRescue.boxCount = 10;
-  //   var $boxObj = $('#box');
-  //   // var top = 360;
-  //   // var left = 200; for(i = 0; i < deliveryRescue.boxCount; i++) {
-  //     $boxObj.css({
-  //       left: left,
-  //       top: 0,
-  //       opacity: 0,
-  //       display: 'block'
-  //     }).animate({
-  //       left: left,
-  //       top: 310,
-  //       opacity: 1
-  //     }, 2500, 'easeOutBounce');
-  // //   }
-  // // }
-  // append to #middle
-  // function init () {
-  //   $('ul').on('click', 'li', function() {
-  //     $(this).parent().append($(this).clone());
-  //   })
-  // }
- // this.dom = $('<p class="circle"></p>').appendTo('#ground');
+}
+
+var currentBoxId = 1;
+deliveryRescue.generateBox = function () {
+  var leftValue = Math.floor(Math.random() * (430 - 160 + 1)) + 160;
+  var divTag = "<div class='box' id='" + currentBoxId + "'></div>"
+  $(divTag)
+  .appendTo("#middle")
+  .css("left",leftValue + "px")
+  .animate({
+    top: 310
+  }, 2500)
+  var whatToLog = "#" + currentBoxId;
+  // $( "#myDiv" ).css( "border", "3px solid red" );
+  console.log($(whatToLog))
+  // //$(currentBoxId).attr('id').remove();
+  setInterval(function() {$(whatToLog).remove()},3000);
+  //$(whatToLog).remove();
+  currentBoxId++;
+  //boxRemove();
+  //detectCollision();
+
+}
 
 deliveryRescue.timerFunction = function() {
   setInterval(function() { deliveryRescue.timerCounter++;
@@ -74,24 +61,20 @@ deliveryRescue.timerFunction = function() {
 }
 
 deliveryRescue.clickButtons = function() {
-  console.log("Button clicked " + $(this).attr('id') + " and the timer is at " + deliveryRescue.timerCounter + " seconds.");
   if ($("#notifyBox").css("display") === "block") {
     if ($(this).attr('id') === "clearNotifyBox") {
      $('#clearNotifyBox').css("display", "none");
      $('#notifyBox').css("display", "none");
-     setInterval(function() {deliveryRescue.generateBox()},1500)
+     setInterval(function() {deliveryRescue.generateBox()},3000)
      deliveryRescue.timerFunction();   
-       // deliveryRescue.collisionDetection();
-       // deliveryRescue.generateBox();  
-       //deliveryRescue.boxFall();  
-     }
-   } else {
-     if ($(this).attr("id") === "reset_button") {
-      deliveryRescue.resetGame();
-    } else {
-      deliveryRescue.moveTruck($(this).attr("id"));
-    } 
-  }
+   }
+ } else {
+   if ($(this).attr("id") === "reset_button") {
+    deliveryRescue.resetGame();
+  } else {
+    deliveryRescue.moveTruck($(this).attr("id"));
+  } 
+}
 }
 
 deliveryRescue.addListeners = function() {
