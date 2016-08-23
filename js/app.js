@@ -17,23 +17,14 @@ deliveryRescue.moveTruck = function(direction){
     $('#notifyBox').css("display", "block");
   }
 
-  deliveryRescue.detectCollision = function () {
-    var truckStatus = {x: 5, y: 5, width: 50, height: 50}
-    var boxStatus = {x: 20, y: 10, width: 10, height: 10}
+var currentBoxId = 0;
+var score = 0;
+var health = 10;
+var arrayOfBoxes = [];
 
-    if (truckStatus.x < boxStatus.x + boxStatus.width &&
-     truckStatus.x + truckStatus.width > boxStatus.x &&
-     truckStatus.y < boxStatus.y + boxStatus.height &&
-     truckStatus.height + truckStatus.y > boxStatus.y) {
-      // collision detected!
-  }
-}
+// var rect = element.getBoundingClientRect();
+// console.log(rect.top, rect.right, rect.bottom, rect.left);
 
-deliveryRescue.boxRemove = function (){
-
-}
-
-var currentBoxId = 1;
 deliveryRescue.generateBox = function () {
   var leftValue = Math.floor(Math.random() * (430 - 160 + 1)) + 160;
   var divTag = "<div class='box' id='" + currentBoxId + "'></div>"
@@ -42,17 +33,36 @@ deliveryRescue.generateBox = function () {
   .css("left",leftValue + "px")
   .animate({
     top: 310
-  }, 2500)
-  var whatToLog = "#" + currentBoxId;
-  // $( "#myDiv" ).css( "border", "3px solid red" );
-  console.log($(whatToLog))
-  // //$(currentBoxId).attr('id').remove();
-  setInterval(function() {$(whatToLog).remove()},3000);
-  //$(whatToLog).remove();
+   }, 2500)
+  var workingBox = "#" + currentBoxId;
+  arrayOfBoxes.push(currentBoxId);
+  
+  setInterval(function() {
+    $(workingBox).remove()
+    var desiredIndexOfArrayOfBoxes = arrayOfBoxes.indexOf('#2');
+    console.log("Array index of working box is " + desiredIndexOfArrayOfBoxes);
+  },2500);
   currentBoxId++;
-  //boxRemove();
-  //detectCollision();
+  
+  //collision detection
+  // setInterval(function() {
+  //   arrayOfBoxes = $('#box')
+  // }, 100);
 
+
+
+
+
+
+  //detectCollision();
+  //   var truckStatus = {x: 5, y: 5, width: 50, height: 50}
+  //   var boxStatus = {x: 20, y: 10, width: 10, height: 10}
+
+  //   if (truckStatus.x < boxStatus.x + boxStatus.width &&
+  //    truckStatus.x + truckStatus.width > boxStatus.x &&
+  //    truckStatus.y < boxStatus.y + boxStatus.height &&
+  //    truckStatus.height + truckStatus.y > boxStatus.y) {
+  // }
 }
 
 deliveryRescue.timerFunction = function() {
