@@ -45,13 +45,19 @@ deliveryRescue.generateBox = function () {
         ((truckPosition.left < blockPosition.left) && (truckPosition.left + 100) > (blockPosition.left + 50))){ 
           //(truckPosition.left - blockPosition.left) < $block.width()) {
             var prevScore = parseInt(deliveryRescue.$score.html());
-            deliveryRescue.$score.html(prevScore += 45); 
+            deliveryRescue.$score.html(prevScore += 50);
+            if (prevScore === 100) {
+              alert("you win")
+            } 
             $block.remove();
           } else {
             if(blockPosition.top + 50 > deliveryRescue.$middle.height() && blockPosition.top + 50 >= deliveryRescue.$middle.height() + 1) {
               var prevHealth = parseInt(deliveryRescue.$health.html());
               deliveryRescue.$health.html(prevHealth - 1);
             } 
+            if (prevHealth === 0) {
+              alert ("you loose sucker")
+            }
           }
         }
       })
@@ -98,7 +104,6 @@ deliveryRescue.clickButtons = function() {
 deliveryRescue.bindArrowKeys = function(e){
   var event = window.event ? window.event : e;
   deliveryRescue.truckPosition = parseInt(deliveryRescue.$truck.css("left").replace("px", ""))
-
   var farLeft  = deliveryRescue.$middle.position().left;
   var farRight = farLeft + deliveryRescue.$middle.width() - deliveryRescue.$truck.width();
 
@@ -112,8 +117,6 @@ deliveryRescue.bindArrowKeys = function(e){
     deliveryRescue.truckPosition += 20; 
     break;
   }
-  
-
   return deliveryRescue.$truck.css("left", deliveryRescue.truckPosition);
 }
 
@@ -126,7 +129,7 @@ deliveryRescue.setup = function() {
   this.timerCounter = 0;
   this.currentBoxId = 0;
   this.score        = 0;
-  this.health       = 10000;
+  this.health       = 10;
   this.arrayOfBoxes = [];
   this.boxWidth     = 50;
   this.speed        = 3000;

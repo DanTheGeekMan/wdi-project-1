@@ -16,7 +16,7 @@ section {
 }
 
 #middle {
-  background-color: black;
+  background-image: url('http://www.codeproject.com/KB/scripting/681130/ScreenshotStarfield.png');
   display: block;
   width: 100%;
   max-width: 1000px;
@@ -79,8 +79,9 @@ section {
   position: absolute;
   left: 0;
   bottom: 0;
-  background-image: url("http://cdn2.bigcommerce.com/server2400/7bd0c/product_images/uploaded_images/yodel-van-side-lr-rt-rgb.jpg?t=1399383377");
-}
+  background-size: 100px 60px;
+  background-image: url('http://www.clipartbay.com/cliparts/cartoon-alien-spaceship-clip-art-uh7bnk6.png');
+  }
 
 .health {
   text-align: left;
@@ -99,7 +100,10 @@ section {
 .box {
   height: 50px;
   width: 50px;
-  background-color: orange;
   position: absolute;
   top: -20px;
+  background-size: 50px;
+  background-repeat: repeat-x;
+  background-image: url('http://sweetclipart.com/multisite/sweetclipart/files/ufo_gray_red_blue.png');
+
 }
