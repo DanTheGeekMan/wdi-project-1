@@ -46,7 +46,11 @@ deliveryRescue.generateBox = function () {
           //(truckPosition.left - blockPosition.left) < $block.width()) {
             var prevScore = parseInt(deliveryRescue.$score.html());
             deliveryRescue.$score.html(prevScore += 50);
-            if (prevScore === 100) {
+            if (prevScore === 10) {
+              alert("you win")
+              // deliveryRescue.$gameResultBox.css("display", "block");
+              // deliveryRescue.$gameResultBox.html("<h1>Player wins.  You're awesome.</h1>");
+              // deliveryRescue.$clearGameResultBox.css("display", "block");
               alert("you win")
             } 
             $block.remove();
@@ -56,6 +60,9 @@ deliveryRescue.generateBox = function () {
               deliveryRescue.$health.html(prevHealth - 1);
             } 
             if (prevHealth === 0) {
+              // deliveryRescue.$gameResultBox.css("display", "block");
+              // deliveryRescue.$gameResultBox.html("<h1>Player looses.  Sorry tough luck.</h1>");
+              // deliveryRescue.$clearGameResultBox.css("display", "block");
               alert ("you loose sucker")
             }
           }
@@ -137,7 +144,7 @@ deliveryRescue.setup = function() {
   this.timerCounter = 0;
   this.currentBoxId = 0;
   this.score        = 0;
-  this.health       = 10;
+  this.health       = 500;
   this.arrayOfBoxes = [];
   this.boxWidth     = 50;
   this.speed        = 3000;

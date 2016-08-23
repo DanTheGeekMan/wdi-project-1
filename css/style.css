@@ -71,7 +71,7 @@ section {
   vertical-align: middle;
 }
 
-#notifyBox {
+#notifyBox #gameResultBox {
   height: 200px;
   width: 320px;
   margin: 30px auto;
@@ -96,6 +96,7 @@ section {
   left: 0;
   bottom: 0;
   background-size: 100px 60px;
+  background-color: blue;
   background-image: url('http://rs539.pbsrc.com/albums/ff351/snailiogamer/crashback.gif~c200');
   transform: scaleX(-1);
   }
