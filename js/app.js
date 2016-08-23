@@ -90,6 +90,14 @@ deliveryRescue.clickButtons = function() {
         deliveryRescue.generateBox()
       },1500);
 
+      document.getElementById("background").animate([
+        { transform: 'translate3D(0, 0, 0)' }, 
+        { transform: 'translate3D(-3000px, 0, 0)' }
+      ], {
+        duration: 8000,
+        iterations: Infinity
+      })
+
       deliveryRescue.timerFunction();   
     }
   } else {
@@ -144,5 +152,6 @@ deliveryRescue.setup = function() {
   this.timerInterval;
   deliveryRescue.addListeners();
 }
+
 
 $(document).ready(deliveryRescue.setup.bind(deliveryRescue));

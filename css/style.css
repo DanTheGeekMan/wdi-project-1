@@ -16,7 +16,11 @@ section {
 }
 
 #middle {
-  background-image: url('http://www.codeproject.com/KB/scripting/681130/ScreenshotStarfield.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
   display: block;
   width: 100%;
   max-width: 1000px;
@@ -25,6 +29,18 @@ section {
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+}
+
+#background {
+  z-index: -1;
+  position: absolute;
+  background: url(http://i.imgur.com/NNoFNWf.png) repeat-y 100% 100%;
+  background-size: 10000px 450px;
+  width: 10000px;
+  height: 450px;
+
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 #reset_button {
@@ -80,7 +96,8 @@ section {
   left: 0;
   bottom: 0;
   background-size: 100px 60px;
-  background-image: url('http://www.clipartbay.com/cliparts/cartoon-alien-spaceship-clip-art-uh7bnk6.png');
+  background-image: url('http://rs539.pbsrc.com/albums/ff351/snailiogamer/crashback.gif~c200');
+  transform: scaleX(-1);
   }
 
 .health {
@@ -104,6 +121,6 @@ section {
   top: -20px;
   background-size: 50px;
   background-repeat: repeat-x;
-  background-image: url('http://sweetclipart.com/multisite/sweetclipart/files/ufo_gray_red_blue.png');
+  background-image: url(http://vignette1.wikia.nocookie.net/crashban/images/2/26/Arrow_crate.gif/revision/latest?cb=20120130175633);
 
 }
