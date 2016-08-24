@@ -1,3 +1,8 @@
+img {
+  width: 300px;
+  height: 150px;
+}
+
 html, body {
   height: 100%;
 }
@@ -34,7 +39,7 @@ section {
 #background {
   z-index: -1;
   position: absolute;
-  background: url(http://i.imgur.com/NNoFNWf.png) repeat-y 100% 100%;
+  background: url('../images/crashBackground.png') repeat-y 100% 100%;
   background-size: 10000px 450px;
   width: 10000px;
   height: 450px;
@@ -70,8 +75,7 @@ section {
   text-align: center;
   vertical-align: middle;
 }
-
-#notifyBox #gameResultBox {
+#notifyBox {
   height: 200px;
   width: 320px;
   margin: 30px auto;
@@ -97,7 +101,7 @@ section {
   bottom: 0;
   background-size: 100px 60px;
   /*background-color: blue;*/
-  background-image: url('http://rs539.pbsrc.com/albums/ff351/snailiogamer/crashback.gif~c200');
+  background-image: url('../images/crash.gif');
   transform: scaleX(-1);
   }
 
@@ -123,6 +127,6 @@ section {
   background-size: 50px;
   /*background-color: orange;*/
   background-repeat: repeat-x;
-  background-image: url(http://vignette1.wikia.nocookie.net/crashban/images/2/26/Arrow_crate.gif/revision/latest?cb=20120130175633);
+  background-image: url('../images/Arrow_crate.gif');
 
 }

@@ -1,94 +1,89 @@
-# wdi-project-1
-This is the first project for WDI London.
+# Delivery Rescue with Crash Bandicoot Theme
 
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #1: The Game
+### YOUR MISSION
+Royal Mail have lost all your Amazon deliveries again but this time Crash is on the scene.  You have to rescue as many crates as you can.
 
-### Overview
+### How to play
+Use the left/right cursor keys to position Crash under the crates.
 
-Let's start out with something fun - **a game!**
+### Features
+It's really good fun.
 
-Everyone will get a chance to **be creative**, and work through some really **tough programming challenges** – since you've already gotten your feet wet with Tic Tac Toe, it's up to you to come up with a fun and interesting game to build.
+### Epic Wins
+**It's all about size and timing 😉**
+#### Size
+1. The scale between the background, the player token and the items is perfect.
+2. The player can usually make it all the way from left to right.  The fact they can't always, makes the game challenging.
+4. The relation between the item and player token size means that getting items is challenging but possible.  Partial collisions do not earn poitns.
 
-**You will be working individually for this project**, but we'll be guiding you along the process and helping as you go. Show us what you've got!
+#### Timing  
+1. The animate drop speed is 3 seconds.  Slower would be boring.  Faster would be very difficult for the player.
+2. The speed of the player token at 20 pixels per key press.
 
+**This was all a fluke.**  My success with size and timing was all a bit of luck.
+ 
+## How I did it
 
----
+### Interesting Bits
+#### Visuals:
+1. Crash & crates: Gifs.
+````
+transform: scaleX(-1);  /*To flip Crash*/
+````
+2. Background: Stretched to 10000px and the animate method used:
 
-### Technical Requirements
+~~~~
+document.getElementById("background").animate([
+   { transform: 'translate3D(0, 0, 0)' }, 
+   { transform: 'translate3D(-3000px, 0, 0)' }
+   ], {
+     duration: 8000,
+     iterations: Infinity
+   })
+~~~~
 
-Your app must:
+#### Collision detection:
+1. The jQuery 'position' method was used.
+2. This returns an object with top and left properties.
+3. These are then passed through the below conditional statement. 
+4. If the 'item' is intersecting the 'player token' a collision is registered.
+5. Lines 3 and 4 ensure the item is completely within the players token on the X axis.
+6. This is to avoid partial collisions being registered as a hit.
 
-* **Render a game in the browser**
-* **Switch turns** between two players
-* **Design logic for winning** & **visually display which player won**
-* **Include separate HTML / CSS / JavaScript files**
-* Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
-* Use **Javascript or jQuery** for **DOM manipulation**
-* **Deploy your game online**, where the rest of the world can access it
-* Use **semantic markup** for HTML and CSS (adhere to best practices)
+~~~~
+if ((blockPosition.top - intersectPoint) >= 0 &&
+   (blockPosition.top - intersectPoint) < intersectMargin &&
+   ((truckPosition.left < blockPosition.left) && 
+   (truckPosition.left + 100) > (blockPosition.left + 50))){ 
+~~~~      
 
----
+## Bugs to work on
+1. When player wins / looses the game doesn't end.  Keep the fun rolling on 🤘
+2. When items are missed health decrements by a value created than 1.  First is 8, then a value in the 40's.  Hence health starts at 250. 
+3. Visuals could do with some tidying up.  Nothing major.  Just a polish.  Colours, fonts, etc.  
 
-### Necessary Deliverables
+## Features to add
+1. Make site responsive and successfully resizable.
+2. Make it playable on a mobile.  Register clicks on left/right of display.
+2. Add pause functionality.
+3. Recore scores with player name and have a score leaderboard.
+4. Vary item drop speed.
+5. Vary dropped item.
+6. Vary score for different dropped items.
+7. Explode missed items.
+8. Rotate dropped items.  Looks like sailing through the air.
+9. Add jump functionality.
+10. Add obstacles that move in from the right of the screen.  If collision detected.  A life is lost.
+11. Add power ups.
+12. Turn into a 'progressive web app'.
+13. Add additional level themes.  Basically change background, items graphics.
 
-* A **working game, built by you**, hosted somewhere on the internet
-* A **link to your hosted working game** in the URL section of your Github repo
-* A **git repository hosted on Github**, with a link to your hosted game, and frequent commits dating back to the very beginning of the project
-* **A ``readme.md`` file** with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc.
+## Superman Pants Epic Win
+1. This has been an amasing growth experience for me.
+2. I have learned a lot about myself in the past two weeks.  Which has culminated in this project.
+3. Carol Dweck's research on Fixed & Growth Mindsets has been invaluable to my growth journey.  I recommend this 10 minute animated video.  Even if you don't have this as a problem.  It is useful to know about.
 
----
+Google Dork: ````mindset fixed growth```` ``` https://www.youtube.com/watch?v=Yl9TVbAal5s```
 
-### Suggested Ways to Get Started
-
-* **Break the project down into different components** (data, presentation, views, style, DOM manipulation) and brainstorm each component individually. Use whiteboards!
-* **Use your Development Tools** (console.log, inspector, alert statements, etc) to debug and solve problems
-* Work through the lessons in class & ask questions when you need to! Think about adding relevant code to your game each night, instead of, you know... _procrastinating_.
-* **Commit early, commit often.** Don’t be afraid to break something because you can always go back in time to a previous version.
-* **Consult documentation resources** (MDN, jQuery, etc.) at home to better understand what you’ll be getting into.
-* **Don’t be afraid to write code that you know you will have to remove later.** Create temporary elements (buttons, links, etc) that trigger events if real data is not available. For example, if you’re trying to figure out how to change some text when the game is over but you haven’t solved the win/lose game logic, you can create a button to simulate that until then.
-
----
-
-### Potential Project Ideas
-
-##### Blackjack
-Make a one player game where people down on their luck can lose all their money by guessing which card the computer will deal next!
-
-##### Concentration
-Sometimes just called "Memory", it's a card game in which all of the cards are laid face down on a surface and two cards are flipped face up over each turn. If you get all the matching cards, you've won!
-
-##### Self-scoring Trivia
-Test your wits & knowledge with whatever-the-heck you know about (so you can actually win). Guess answers, have the computer tell you how right you are!
-
----
-
-### Useful Resources
-
-* **[MDN Javascript Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)** _(a great reference for all things Vanilla Javascript)_
-* **[jQuery Docs](http://api.jquery.com)** _(if you're using jQuery)_
-* **[Github Pages](https://pages.github.com)** _(for hosting your game)_
-
----
-
-### Project Feedback + Evaluation
-
-* __Project Workflow__: Did you complete the user stories, wireframes, task tracking, and/or ERDs, as specified above? Did you use source control as expected for the phase of the program you’re in (detailed above)?
-
-* __Technical Requirements__: Did you deliver a project that met all the technical requirements? Given what the class has covered so far, did you build something that was reasonably complex?
-
-* __Creativity__: Did you add a personal spin or creative element into your project submission? Did you deliver something of value to the end user (not just a login button and an index page)?
-
-* __Code Quality__: Did you follow code style guidance and best practices covered in class, such as spacing, modularity, and semantic naming? Did you comment your code as your instructors have in class?
-
-* __Deployment__: Did you deploy your application to a public url using GitHub Pages?
-
-* __Total__: Your instructors will give you a total score on your project between:
-
-    Score | Expectations
-    ----- | ------------
-    **0** | _Incomplete._
-    **1** | _Does not meet expectations._
-    **2** | _Meets expectations, good job!_
-    **3** | _Exceeds expectations, you wonderful creature, you!_
-
- This will serve as a helpful overall gauge of whether you met the project goals, but __the more important scores are the individual ones__ above, which can help you identify where to focus your efforts for the next project!
+## Shout outs
+Special thanks go out to Alex Chin and Rane Gowan.  I couldn't have done it without the two of you.  On Friday night I am buying you both a drink.
