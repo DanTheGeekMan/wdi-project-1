@@ -35,26 +35,26 @@ deliveryRescue.generateBox = function () {
     duration: deliveryRescue.speed,
     step: function(now, fx){
       var $block          = $(this);
-      //var testing = $block.width()
       var blockPosition   = $block.position();
       var truckPosition   = deliveryRescue.$truck.position();
       var intersectPoint  = deliveryRescue.$middle.height() - $block.height() - deliveryRescue.$truck.height();
-      //var intersectHoriz  = deliveryRescue.$middle.width() - $block.width() - deliveryRescue.$truck.width();
       var intersectMargin = 5;
       if ((blockPosition.top - intersectPoint) >= 0 && (blockPosition.top - intersectPoint) < intersectMargin &&
         ((truckPosition.left < blockPosition.left) && (truckPosition.left + 100) > (blockPosition.left + 50))){ 
-          //(truckPosition.left - blockPosition.left) < $block.width()) {
-            var prevScore = parseInt(deliveryRescue.$score.html());
-            deliveryRescue.$score.html(prevScore += 50);
-            if (prevScore === 5000) {
-              deliveryRescue.$gameResultBox.css("display", "block");
-              deliveryRescue.$gameResultBox.html("<h1>Player wins.  You're awesome.</h1>");
-              deliveryRescue.$clearGameResultBox.css("display", "block");
-            } 
-            $block.remove();
-          } else {
-            if(blockPosition.top + 50 > deliveryRescue.$middle.height() && blockPosition.top + 50 >= deliveryRescue.$middle.height() + 1) {
+        var prevScore = parseInt(deliveryRescue.$score.html());
+      deliveryRescue.$score.html(prevScore += 50);
+      if (prevScore === 5000) {
+        deliveryRescue.$gameResultBox.css("display", "block");
+        deliveryRescue.$gameResultBox.html("<h1>Player wins.  You're awesome.</h1>");
+        deliveryRescue.$clearGameResultBox.css("display", "block");
+      } 
+      $block.remove();
+    } else {
+            if((blockPosition.top + 50) > deliveryRescue.$middle.height() //&& blockPosition.top + 50 >= deliveryRescue.$middle.height() + 1) 
+              ){
               var prevHealth = parseInt(deliveryRescue.$health.html());
+            console.log(deliveryRescue.$middle.height())
+              //var deliveryRescue.pointLost = true
               deliveryRescue.$health.html(prevHealth - 1);
             } 
             if (prevHealth === 0) {
@@ -64,6 +64,7 @@ deliveryRescue.generateBox = function () {
             }
           }
         }
+
       })
 
   var workingBox = "#" + deliveryRescue.currentBoxId;
